@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 
-struct anime: Codable {
+struct Anime: Codable {
     let name: String?
     let title: String?
     let episodes: String?
@@ -18,11 +18,22 @@ struct anime: Codable {
     let description: String?
 }
 
+struct AnimeJson {
+    var name: String?
+    var title: String?
+    var episodes: String?
+    var episode_length: String?
+    var description: String?
+}
+
 
 class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
-
     
-    var names = ["attack_on_titan","beck","clannad","code_geass","fma",
+    var arrAnime = [AnimeJson]()
+    
+    var images = [UIImage]()
+    
+    let names = ["attack_on_titan","beck","clannad","code_geass","fma",
                  "gto","monster", "opm", "steinsgate","usagi"]
     
     fileprivate let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -31,43 +42,11 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
-        
-        let imageURL = "https://raw.githubusercontent.com/techparkios/ios-lectures-fall-2018/master/06/" + self.names[indexPath.row] + ".jpg"
-        
-        let JsonURL = "https://raw.githubusercontent.com/techparkios/ios-lectures-fall-2018/master/06/" + self.names[indexPath.row] + ".json"
-        
-        let url = URL(string: imageURL)!
-
-DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let data = try? Data(contentsOf: url) else {
-                return
-            }
-            guard let image = UIImage(data: data) else {
-                return
-            }
-            DispatchQueue.main.async {
-                cell.imageCell.image = image
-            }
+        if !arrAnime.isEmpty && !images.isEmpty{
+            cell.imageCell.image = images[indexPath.row]
+            cell.nameLabelCell.text = arrAnime[indexPath.row].name ?? "None"
+            cell.descLabelCell.text = arrAnime[indexPath.row].episodes ?? "None"
         }
-        
-        let gitUrl = URL(string: JsonURL)!
-        
-        URLSession.shared.dataTask(with: gitUrl) { (data, response, error) in
-            guard let data = data else { return }
-            do {
-                let decoder = JSONDecoder()
-                let gitData = try decoder.decode(anime.self, from: data)
-                
-            DispatchQueue.main.async {
-                cell.nameLabelCell.text = gitData.name
-                cell.descLabelCell.text = "Episodes: " + gitData.episodes!
-            }
-                
-            } catch let err {
-                print("Err", err)
-            }
-            }.resume()
-        
         return cell
     }
     
@@ -85,9 +64,13 @@ DispatchQueue.global(qos: .background).async { [weak self] in
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createArray()
         
         tableView.dataSource = self
         tableView.delegate = self
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     
     }
             
@@ -96,7 +79,11 @@ DispatchQueue.global(qos: .background).async { [weak self] in
         if segue.identifier == "Segue" {
             if let indexPath = sender as? IndexPath {
                 let destinationVC = segue.destination as! SecViewController
-                destinationVC.number = indexPath.row
+                destinationVC.image.image = self.images[indexPath.row]
+                destinationVC.name.text = self.arrAnime[indexPath.row].name!
+                destinationVC.episods.text = self.arrAnime[indexPath.row].episodes!
+                destinationVC.ep_length.text  = self.arrAnime[indexPath.row].episode_length!
+                destinationVC.desc.text = self.arrAnime[indexPath.row].description!
             }
         }
     }
@@ -105,6 +92,55 @@ DispatchQueue.global(qos: .background).async { [weak self] in
         performSegue(withIdentifier: "Segue" , sender: indexPath)
     }
     
-
+    
+    func createArray(){
+        for el in self.names {
+            
+            let imageURL = "https://raw.githubusercontent.com/techparkios/ios-lectures-fall-2018/master/06/" + el + ".jpg"
+            
+            let url = URL(string: imageURL)!
+            
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                guard let data = try? Data(contentsOf: url) else {
+                    return
+                }
+                guard let image = UIImage(data: data) else {
+                    return
+                }
+                
+                self!.images.append(image)
+            }
+            
+            let JsonURL = "https://raw.githubusercontent.com/techparkios/ios-lectures-fall-2018/master/06/" + el + ".json"
+            
+            let gitUrl = URL(string: JsonURL)!
+            
+            URLSession.shared.dataTask(with: gitUrl) { (data, response, error) in
+                guard let data = data else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let gitData = try decoder.decode(Anime.self, from: data)
+            
+//                        self.newAnime.name = gitData.name!
+//                        self.newAnime.title = gitData.title!
+//                        self.newAnime.episodes = "Episodes: " + gitData.episodes!
+//                        self.newAnime.episode_length = gitData.episode_length!
+//                        self.newAnime.description = gitData.description!
+                    
+                        self.arrAnime.append(AnimeJson(name: gitData.name,
+                                                       title: gitData.title,
+                                                       episodes: gitData.episodes,
+                                                       episode_length: gitData.episode_length,
+                                                       description: gitData.description))
+                } catch let err {
+                    print("Err", err)
+                }
+                }.resume()
+            
+        }
+        
+        
+    }
+    
 }
 
