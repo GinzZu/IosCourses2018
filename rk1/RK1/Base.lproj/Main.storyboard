@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aPo-an-ca9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aPo-an-ca9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +28,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="beck" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-kg-3AL">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-kg-3AL">
                                                     <rect key="frame" x="15" y="11" width="120" height="178"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -52,6 +52,7 @@
                                             <outlet property="descLabelCell" destination="oUk-3c-ID7" id="8OS-lS-irb"/>
                                             <outlet property="imageCell" destination="IOt-kg-3AL" id="k4Z-7C-vpl"/>
                                             <outlet property="nameLabelCell" destination="50U-AU-Uq3" id="ahm-hY-ArD"/>
+                                            <segue destination="Cfc-bq-DO9" kind="show" identifier="Segue" id="r1Y-5t-wUb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -84,10 +85,10 @@
             </objects>
             <point key="canvasLocation" x="2514.4000000000001" y="132.68365817091455"/>
         </scene>
-        <!--View Controller-->
+        <!--Sec View Controller-->
         <scene sceneID="E29-BW-ccM">
             <objects>
-                <viewController id="Cfc-bq-DO9" sceneMemberID="viewController">
+                <viewController id="Cfc-bq-DO9" customClass="SecViewController" customModule="RK1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TxT-fr-aRm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,7 +154,4 @@
             <point key="canvasLocation" x="1575.2" y="132.68365817091455"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="beck" width="225" height="321"/>
-    </resources>
 </document>
