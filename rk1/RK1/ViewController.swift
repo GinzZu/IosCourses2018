@@ -23,7 +23,7 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
 
     
     var names = ["attack_on_titan","beck","clannad","code_geass","fma",
-                 "gits","gto","monster", "opm", "staingate","usagi"]
+                 "gto","monster", "opm", "steinsgate","usagi"]
     
     fileprivate let session = URLSession(configuration: URLSessionConfiguration.default)
 
@@ -60,7 +60,7 @@ DispatchQueue.global(qos: .background).async { [weak self] in
                 
             DispatchQueue.main.async {
                 cell.nameLabelCell.text = gitData.name
-                cell.descLabelCell.text = gitData.episodes
+                cell.descLabelCell.text = "Episodes: " + gitData.episodes!
             }
                 
             } catch let err {
@@ -94,9 +94,9 @@ DispatchQueue.global(qos: .background).async { [weak self] in
     
     override func prepare(for segue: UIStoryboardSegue, sender: (Any)?) {
         if segue.identifier == "Segue" {
-            if (sender as? IndexPath) != nil {
+            if let indexPath = sender as? IndexPath {
                 let destinationVC = segue.destination as! SecViewController
-//                destinationVC.name = self.animals[indexPath.row]
+                destinationVC.number = indexPath.row
             }
         }
     }

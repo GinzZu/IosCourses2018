@@ -28,25 +28,36 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-kg-3AL">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-kg-3AL">
                                                     <rect key="frame" x="15" y="11" width="120" height="178"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="rvN-d6-2i9"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50U-AU-Uq3">
-                                                    <rect key="frame" x="143" y="11" width="217" height="37"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50U-AU-Uq3">
+                                                    <rect key="frame" x="143" y="0.0" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUk-3c-ID7">
-                                                    <rect key="frame" x="143" y="56" width="217" height="133"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUk-3c-ID7">
+                                                    <rect key="frame" x="143" y="40" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="50U-AU-Uq3" firstAttribute="leading" secondItem="IOt-kg-3AL" secondAttribute="trailing" constant="8" id="2Ij-A1-IFX"/>
+                                                <constraint firstItem="50U-AU-Uq3" firstAttribute="top" secondItem="pwq-hg-jWR" secondAttribute="top" id="46Y-2m-aRn"/>
+                                                <constraint firstItem="IOt-kg-3AL" firstAttribute="bottom" secondItem="pwq-hg-jWR" secondAttribute="bottomMargin" id="Dwh-th-cfp"/>
+                                                <constraint firstItem="IOt-kg-3AL" firstAttribute="top" secondItem="pwq-hg-jWR" secondAttribute="topMargin" id="F4f-YD-kIP"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oUk-3c-ID7" secondAttribute="trailing" constant="20" symbolic="YES" id="QLL-Tm-Rse"/>
+                                                <constraint firstItem="IOt-kg-3AL" firstAttribute="leading" secondItem="pwq-hg-jWR" secondAttribute="leadingMargin" id="ZJ4-un-t5y"/>
+                                                <constraint firstItem="oUk-3c-ID7" firstAttribute="top" secondItem="50U-AU-Uq3" secondAttribute="bottom" constant="19" id="gmF-dD-kXx"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="50U-AU-Uq3" secondAttribute="trailing" constant="20" symbolic="YES" id="kRd-yh-gea"/>
+                                                <constraint firstItem="oUk-3c-ID7" firstAttribute="leading" secondItem="IOt-kg-3AL" secondAttribute="trailing" constant="8" symbolic="YES" id="vub-nN-MFJ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="descLabelCell" destination="oUk-3c-ID7" id="8OS-lS-irb"/>
@@ -78,6 +89,7 @@
                     <navigationItem key="navigationItem" id="Qdh-wb-bxf"/>
                     <connections>
                         <outlet property="tableView" destination="Bi2-nN-L8E" id="mUb-pj-XKV"/>
+                        <segue destination="Cfc-bq-DO9" kind="show" identifier="Segue" id="2SI-Go-iVS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="awF-sQ-QVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
