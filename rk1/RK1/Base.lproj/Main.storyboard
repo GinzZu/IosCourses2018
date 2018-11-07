@@ -52,7 +52,6 @@
                                             <outlet property="descLabelCell" destination="oUk-3c-ID7" id="8OS-lS-irb"/>
                                             <outlet property="imageCell" destination="IOt-kg-3AL" id="k4Z-7C-vpl"/>
                                             <outlet property="nameLabelCell" destination="50U-AU-Uq3" id="ahm-hY-ArD"/>
-                                            <segue destination="Cfc-bq-DO9" kind="show" identifier="Segue" id="r1Y-5t-wUb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -130,6 +129,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="R1Y-om-QHQ"/>
                     </view>
+                    <connections>
+                        <outlet property="desc" destination="99S-zt-tSP" id="8bt-xB-Arf"/>
+                        <outlet property="ep_length" destination="IJz-Te-nAp" id="mUM-6a-Q7q"/>
+                        <outlet property="episods" destination="SRw-Gi-SfF" id="OOu-PW-PLz"/>
+                        <outlet property="image" destination="yeR-w1-9UV" id="y8k-Ch-Gtj"/>
+                        <outlet property="name" destination="zH9-ZN-M4c" id="iig-v7-Zk4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OnI-uQ-Lqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

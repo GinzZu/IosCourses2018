@@ -9,7 +9,21 @@
 import UIKit
 
 class SecViewController: UIViewController {
+    
+    
+    @IBOutlet weak var image: UIImageView!
+    
+    
+    @IBOutlet weak var name: UILabel!
+    
 
+    @IBOutlet weak var episods: UILabel!
+    
+    @IBOutlet weak var ep_length: UILabel!
+    @IBOutlet weak var desc: UITextView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

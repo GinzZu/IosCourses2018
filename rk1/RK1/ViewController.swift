@@ -9,41 +9,14 @@
 import UIKit
 import SDWebImage
 
-enum Method {
-    case dumb
-    case fixedDumb
-    case session
-    case lib
-}
-//import Gloss
-//
-//struct SimpleModel: Gloss.Decodable {
-//    let name: String
-//    let type: String
-//    let episodes: String
-//    let episode_length: String
-//    let description: String
-//
-//    init(name: String?) {
-//        self.name = name ?? "no name"
-//        self.type = type ?? "no type"
-//        self.episodes = episodes ?? "no episodes"
-//        self.episode_length = episode_length ?? "no episode_length"
-//        self.description = description ?? "no description"
-//    }
-//
-//    init?(json: JSON) {
-//        guard let name: String = "name" <~~ json else {
-//            return nil
-//        }
-//
-//        self.name = name
-//    }
-//}
 
-//fileprivate struct Cells {
-//    static let plain = "TableCell.plain"
-//}
+struct anime: Codable {
+    let name: String?
+    let title: String?
+    let episodes: String?
+    let episode_length: String?
+    let description: String?
+}
 
 
 class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
@@ -53,13 +26,7 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
                  "gits","gto","monster", "opm", "staingate","usagi"]
     
     fileprivate let session = URLSession(configuration: URLSessionConfiguration.default)
-//    fileprivate var data: [SimpleModel] = []
-    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
-//
-//        return cell
-//    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -67,25 +34,39 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
         
         let imageURL = "https://raw.githubusercontent.com/techparkios/ios-lectures-fall-2018/master/06/" + self.names[indexPath.row] + ".jpg"
         
-        let sourceURLJson = "https://github.com/techparkios/ios-lectures-fall-2018/blob/master/06/" + self.names[indexPath.row] + ".json"
+        let JsonURL = "https://raw.githubusercontent.com/techparkios/ios-lectures-fall-2018/master/06/" + self.names[indexPath.row] + ".json"
         
         let url = URL(string: imageURL)!
 
-        DispatchQueue.global(qos: .background).async { [weak self] in
+DispatchQueue.global(qos: .background).async { [weak self] in
             guard let data = try? Data(contentsOf: url) else {
                 return
             }
-            
             guard let image = UIImage(data: data) else {
                 return
             }
-            
             DispatchQueue.main.async {
                 cell.imageCell.image = image
             }
         }
         
-        cell.nameLabelCell.text = names[indexPath.row]
+        let gitUrl = URL(string: JsonURL)!
+        
+        URLSession.shared.dataTask(with: gitUrl) { (data, response, error) in
+            guard let data = data else { return }
+            do {
+                let decoder = JSONDecoder()
+                let gitData = try decoder.decode(anime.self, from: data)
+                
+            DispatchQueue.main.async {
+                cell.nameLabelCell.text = gitData.name
+                cell.descLabelCell.text = gitData.episodes
+            }
+                
+            } catch let err {
+                print("Err", err)
+            }
+            }.resume()
         
         return cell
     }
@@ -113,7 +94,7 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
     
     override func prepare(for segue: UIStoryboardSegue, sender: (Any)?) {
         if segue.identifier == "Segue" {
-            if let indexPath = sender as? IndexPath {
+            if (sender as? IndexPath) != nil {
                 let destinationVC = segue.destination as! SecViewController
 //                destinationVC.name = self.animals[indexPath.row]
             }
