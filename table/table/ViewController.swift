@@ -39,14 +39,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // create a new cell if needed or reuse an old one
-        let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
+        let cell:UITableViewCell! = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)
         
         // set the text from the data model
         cell.textLabel?.text = self.animals[indexPath.row]
         return cell
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: (Any)?) {
         if segue.identifier == "Segue" {
             if let indexPath = sender as? IndexPath {
                 let destinationVC = segue.destination as! View0
