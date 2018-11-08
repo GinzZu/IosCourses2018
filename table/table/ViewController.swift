@@ -9,7 +9,6 @@
 import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    // Data model: These strings will be the data for the table view cells
     let animals: [String] = ["Dima","Nikita","Denis"]
     
     // cell reuse id (cells that scroll out of view can be reused)
